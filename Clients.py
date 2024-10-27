@@ -1,6 +1,8 @@
 #Выбрана сущность Clients
 
+import json
 import re
+
 class Client:
     def __init__(self, client_id, company_name, contact_person, phone, email, passport):
         # Приватные поля, доступ к которым осуществляется через методы
@@ -11,6 +13,29 @@ class Client:
         self.__email = self.set_value(email, self.is_valid_email)
         self.__passport = self.set_value(passport, self.is_valid_passport)
 
+    @classmethod
+    def from_json(cls, json_data):
+        try:
+            data = json.loads(json_data)  # Парсинг JSON
+        except json.JSONDecodeError:
+            print("Ошибка: неверный формат JSON.")
+            return None  
+        
+        required_fields = ['client_id', 'company_name', 'contact_person', 'phone', 'email', 'passport']
+        for field in required_fields:
+            if field not in data:
+                print(f"Ошибка: отсутствует необходимое поле: {field}")
+                return None  
+
+        return cls(
+            client_id=data['client_id'],
+            company_name=data['company_name'],
+            contact_person=data['contact_person'],
+            phone=data['phone'],
+            email=data['email'],
+            passport=data['passport'],
+        )
+        
     # Методы для получения значений полей (геттеры)
     def get_client_id(self):
         return self.__client_id
