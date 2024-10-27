@@ -5,11 +5,11 @@ class Client:
     def __init__(self, client_id, company_name, contact_person, phone, email, passport):
         # Приватные поля, доступ к которым осуществляется через методы
         self.__client_id = client_id
-        self.set_company_name(company_name)
-        self.set_contact_person(contact_person)
-        self.set_phone(phone)
-        self.set_email(email)
-        self.set_passport(passport)
+        self.__company_name = self.set_value(company_name, self.is_valid_company_name)
+        self.__contact_person = self.set_value(contact_person, self.is_valid_contact_person)
+        self.__phone = self.set_value(phone, self.is_valid_phone)
+        self.__email = self.set_value(email, self.is_valid_email)
+        self.__passport = self.set_value(passport, self.is_valid_passport)
 
     # Методы для получения значений полей (геттеры)
     def get_client_id(self):
@@ -30,36 +30,12 @@ class Client:
     def get_passport(self):
         return self.__passport
 
-    # Методы для изменения значений полей (сеттеры)
-    def set_company_name(self, company_name):
-        if self.is_valid_company_name(company_name):
-            self.__company_name = company_name
+    # Универсальный метод для установки значений с проверкой валидности
+    def set_value(self, value, validator):
+        if validator(value):
+            return value
         else:
-            print("Некорректное название компании. Название не обновлено.")
-
-    def set_contact_person(self, contact_person):
-        if self.is_valid_contact_person(contact_person):
-            self.__contact_person = contact_person
-        else:
-            print("Некорректное контактное лицо. Данные не обновлены.")
-
-    def set_phone(self, phone):
-        if self.is_valid_phone(phone):
-            self.__phone = phone
-        else:
-            print("Некорректный номер телефона. Телефон не обновлен.")
-
-    def set_email(self, email):
-        if self.is_valid_email(email):
-            self.__email = email
-        else:
-            print("Некорректный email. Email не обновлен.")
-
-    def set_passport(self, passport):
-        if self.is_valid_passport(passport):
-            self.__passport = passport
-        else:
-            print("Некорректные паспортные данные. Данные не обновлены.")
+            raise ValueError(f"Некорректное значение: {value}")
 
    # Методы для проверки валидности данных (статические)
     @staticmethod
