@@ -83,3 +83,29 @@ class Client:
     def is_valid_passport(passport):
         return re.fullmatch(r'\d{4} \d{6}', passport) is not None
 
+    #Полная и краткая форма. Сравнение объектов.
+    
+    def __str__(self):
+        return (
+            f"Client ID: {self.__client_id}\n"
+            f"Company Name: {self.__company_name}\n"
+            f"Contact Person: {self.__contact_person}\n"
+            f"Phone: {self.__phone}\n"
+            f"Email: {self.__email}\n"
+            f"Passport: {self.__passport}"
+        )
+
+    def get_short_info(self):
+        return f"{self.__company_name}, {self.__contact_person}, {self.__phone}"
+
+    def __eq__(self, other):
+        if not isinstance(other, Client):
+            return False
+        return (
+            self.__client_id == other.__client_id and
+            self.__company_name == other.__company_name and
+            self.__contact_person == other.__contact_person and
+            self.__phone == other.__phone and
+            self.__email == other.__email and
+            self.__passport == other.__passport
+        )
