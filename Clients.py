@@ -109,29 +109,3 @@ class Client:
             self.__email == other.__email and
             self.__passport == other.__passport
         )
-# Новый класс для краткой версии данных Client
-class ClientShortInfo:
-    def __init__(self, client):
-        if not isinstance(client, Client):
-            raise ValueError("Передан некорректный объект, ожидался объект класса Client.")
-        
-        # Краткая версия данных
-        self.__company_name = client.get_company_name()
-        self.__contact_person = client.get_contact_person()
-        self.__phone = client.get_phone()
-
-    def __str__(self):
-        return (
-            f"Company Name: {self.__company_name}\n"
-            f"Contact Person: {self.__contact_person}\n"
-            f"Phone: {self.__phone}"
-        )
-
-    def get_company_name(self):
-        return self.__company_name
-
-    def get_contact_person(self):
-        return self.__contact_person
-
-    def get_phone(self):
-        return self.__phone
