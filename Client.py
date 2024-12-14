@@ -61,18 +61,16 @@ class Client(ClientShort):
         return re.fullmatch(r'\d{4} \d{6}', passport) is not None
 
 
-    def __eq__(self, other):
-        if not isinstance(other, Client):
-            return False
-        return (
-            self.__client_id == other.__client_id and
-            self.__company_name == other.__company_name and
-            self.__contact_person == other.__contact_person and
-            self.__phone == other.__phone and
-            self.__email == other.__email and
-            self.__passport == other.__passport
-        )
-        
+def __eq__(self, other):
+    if not isinstance(other, Client):  # Проверяем, что объекты одного типа
+        return False
+    return (
+        super().__eq__(other) and  # Сравниваем поля базового класса
+        self.__client_id == other.__client_id and
+        self.__email == other.__email and
+        self.__passport == other.__passport
+    )
+    
     def __str__(self):
         short_info = super().__str__()
         return (
