@@ -44,6 +44,18 @@ class Client(ClientShort):
     def get_passport(self):
         return self.__passport
 
+    def set_email(self, email):
+        if self.is_valid_email(email):
+            self.__email = email
+        else:
+            print("Некорректный email. Email не обновлен.")
+
+    def set_passport(self, passport):
+        if self.is_valid_passport(passport):
+            self.__passport = passport
+        else:
+            print("Некорректные паспортные данные. Данные не обновлены.")
+            
     # Универсальный метод для установки значений с проверкой валидности
     def set_value(self, value, validator):
         if validator(value):
