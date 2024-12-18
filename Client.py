@@ -56,13 +56,6 @@ class Client(ClientShort):
         else:
             print("Некорректные паспортные данные. Данные не обновлены.")
             
-    # Универсальный метод для установки значений с проверкой валидности
-    def set_value(self, value, validator):
-        if validator(value):
-            return value
-        else:
-            raise ValueError(f"Некорректное значение: {value}")
-
    # Методы для проверки валидности данных (статические)
    @staticmethod
     def is_valid_email(email):
