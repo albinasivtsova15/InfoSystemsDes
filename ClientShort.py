@@ -17,7 +17,7 @@ class ClientShort:
     def get_phone(self):
         return self.__phone
 
-        def set_company_name(self, company_name):
+    def set_company_name(self, company_name):
         if self.is_valid_company_name(company_name):
             self.__company_name = company_name
         else:
@@ -34,12 +34,6 @@ class ClientShort:
             self.__phone = phone
         else:
             print("Некорректный номер телефона. Телефон не обновлен.")
-
-    # Универсальный метод для проверки и записи
-    def set_value(self, value, validator):
-        if validator(value):
-            return value
-        raise ValueError(f"Некорректное значение: {value}")
 
     # Статические методы для валидации
     @staticmethod
