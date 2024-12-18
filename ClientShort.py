@@ -3,9 +3,9 @@ import re
 
 class ClientShort:
     def __init__(self, company_name, contact_person, phone):
-        self.__company_name = self.set_value(company_name, self.is_valid_name)
-        self.__contact_person = self.set_value(contact_person, self.is_valid_name)
-        self.__phone = self.set_value(phone, self.is_valid_phone)
+        self.set_company_name(company_name)
+        self.set_contact_person(contact_person)
+        self.set_phone(phone)
 
     # Геттеры
     def get_company_name(self):
