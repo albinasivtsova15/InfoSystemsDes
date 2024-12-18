@@ -8,8 +8,8 @@ class Client(ClientShort):
     def __init__(self, client_id, company_name, contact_person, phone, email, passport):
         super().__init__(company_name, contact_person, phone)  # Инициализация базового класса
         self.__client_id = client_id
-        self.__email = self.set_value(email, self.is_valid_email)
-        self.__passport = self.set_value(passport, self.is_valid_passport)
+        self.set_email(email)
+        self.set_passport(passport)
 
 @classmethod
     def from_json(cls, json_data):
