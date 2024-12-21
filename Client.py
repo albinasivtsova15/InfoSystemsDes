@@ -69,8 +69,6 @@ def __eq__(self, other):
         return False
     return (
         super().__eq__(other) and  # Сравниваем поля базового класса
-        self.__client_id == other.__client_id and
-        self.__email == other.__email and
         self.__passport == other.__passport
     )
     
