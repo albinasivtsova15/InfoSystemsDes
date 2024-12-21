@@ -18,22 +18,19 @@ class ClientShort:
         return self.__phone
 
     def set_company_name(self, company_name):
-        if self.is_valid_company_name(company_name):
-            self.__company_name = company_name
-        else:
-            print("Некорректное название компании. Название не обновлено.")
+        if not self.is_valid_name(company_name):
+            raise ValueError("Некорректное название компании")
+        self.__company_name = company_name
 
     def set_contact_person(self, contact_person):
-        if self.is_valid_contact_person(contact_person):
-            self.__contact_person = contact_person
-        else:
-            print("Некорректное контактное лицо. Данные не обновлены.")
+        if not self.is_valid_name(contact_person):
+            raise ValueError("Некорректное контактное лицо")
+        self.__contact_person = contact_person
 
     def set_phone(self, phone):
-        if self.is_valid_phone(phone):
-            self.__phone = phone
-        else:
-            print("Некорректный номер телефона. Телефон не обновлен.")
+        if not self.is_valid_phone(phone):
+            raise ValueError("Некорректный номер телефона")
+        self.__phone = phone
 
     # Статические методы для валидации
     @staticmethod
