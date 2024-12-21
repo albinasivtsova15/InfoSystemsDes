@@ -45,16 +45,14 @@ class Client(ClientShort):
         return self.__passport
 
     def set_email(self, email):
-        if self.is_valid_email(email):
-            self.__email = email
-        else:
-            print("Некорректный email. Email не обновлен.")
+        if not self.is_valid_email(email):
+            raise ValueError("Некорректный формат email")
+        self.__email = email
 
     def set_passport(self, passport):
-        if self.is_valid_passport(passport):
-            self.__passport = passport
-        else:
-            print("Некорректные паспортные данные. Данные не обновлены.")
+        if not self.is_valid_passport(passport):
+            raise ValueError("Некорректный формат паспортных данных")
+        self.__passport = passport
             
    # Методы для проверки валидности данных (статические)
    @staticmethod
