@@ -35,7 +35,10 @@ class ClientRepJson:
             'email': email,
             'passport': passport
         }
-
+     # Проверка на уникальность email
+        if any(entry['email'] == email for entry in data):
+            raise ValueError('Email должен быть уникальным!')
+            
         # Добавляем нового клиента в список
         data.append(new_entity)
         
