@@ -8,11 +8,11 @@ class ClientRepFile:
         self.strategy = strategy
     
     def get_all(self):
-        #Получить все элементы
+        """Получить все элементы"""
         return self.strategy.read()
     
     def add_entity(self, company_name, contact_person, phone, email, passport):      
-        #Добавить нового клиента в список с новым id
+        """Добавить нового клиента в список с новым id"""
         # Чтение данных из файла
         data = self.strategy.read()
         # Генерация нового ID
@@ -34,7 +34,7 @@ class ClientRepFile:
         self.strategy.write(data)
     
     def get_by_id(self, client_id):
-        #Получить клиента по ID
+        """Получить клиента по ID"""
         data = self.strategy.read()
         for entry in data:
             if entry['client_id'] == client_id:
@@ -42,21 +42,21 @@ class ClientRepFile:
         return None  # Если объект не найден
     
     def get_k_n_short_list(self, k, n):
-        #Получить список k по счету n объектов
+        """Получить список k по счету n объектов"""
         data = self.strategy.read()
         start = (n - 1) * k
         end = start + k
         return data[start:end]
     
     def sort_by_field(self, field):
-        #Сортировать элементы по выбранному полю
+        """Сортировать элементы по выбранному полю"""
         data = self.strategy.read()
         if field in ["company_name", "contact_person", "phone", "email", "passport"]:
             data.sort(key=lambda x: x.get(field))
         return data
     
     def replace_by_id(self, client_id, company_name, contact_person, phone, email, passport):
-        #Заменить данные клиента по ID
+        """Заменить данные клиента по ID"""
         data = self.strategy.read()
         entity = self.get_by_id(client_id)
         if not entity:
@@ -79,7 +79,7 @@ class ClientRepFile:
         self.strategy.write(data)
     
     def delete_by_id(self, client_id):
-        #Удалить клиента по ID
+        """Удалить клиента по ID"""
         data = self.strategy.read()
         entity = self.get_by_id(client_id)
         if not entity:
@@ -88,6 +88,6 @@ class ClientRepFile:
         self.strategy.write(data)
     
     def get_count(self):
-        #Получить количество клиентов
+        """Получить количество клиентов"""
         data = self.strategy.read()
         return len(data)
