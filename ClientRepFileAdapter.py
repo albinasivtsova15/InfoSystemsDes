@@ -1,4 +1,4 @@
-import ClientRepFile
+from ClienttRepFile import ClientRepFile
 
 class ClientRepFileAdapter:
     
