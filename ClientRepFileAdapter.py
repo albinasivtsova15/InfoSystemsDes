@@ -16,11 +16,11 @@ class ClientRepFileAdapter:
         self._client_rep_file.delete_by_id(client_id)
         self._client_rep_file.write_data_to_file()
     
-    def replace_by_id(self, client_id, company_name, contact_person, email, phone, passport):
+     def update_by_id(self, client_id, company_name, contact_person, email, phone, passport):
         self._client_rep_file.replace_by_id(client_id, company_name, contact_person, email, phone, passport)
         self._client_rep_file.write_data_to_file()
     
-    def add_entity(self, company_name, contact_person, email, phone, passport):
+   def add(self, company_name, contact_person, email, phone, passport):
         self._client_rep_file.add_entity(company_name, contact_person, email, phone, passport)
         self._client_rep_file.write_data_to_file()
     
