@@ -1,26 +1,22 @@
-import psycopg2
+
 import uuid
+from DatabaseConnection import DatabaseConnection
 
 class ClientRepDB:
-    
+      """Класс для управления сущностью patient."""
     def __init__(self, db_config):
-        self.connection = psycopg2.connect(
-            dbname=db_config['dbname'],
-            user=db_config['user'],
-            password=db_config['password'],
-            host=db_config['host'],
-            port=db_config['port']
-        )
-        self.connection.autocommit = True
+           self.db = DatabaseConnection(db_config)
     
     def get_by_id(self, client_id):
-        with self.connection.cursor() as cursor:
+        """Получить пациента по ID."""
+        with self.db.get_cursor() as cursor:
             cursor.execute("SELECT * FROM client WHERE id = %s", (client_id,))
             result = cursor.fetchone()
         return result
     
     def get_k_n_short_list(self, k, n):
-        with self.connection.cursor() as cursor:
+       """Получить список из k элементов, начиная с n-го блока."""
+        with self.db.get_cursor() as cursor:
             offset = k * (n - 1)
             cursor.execute("""
                 SELECT id, company_name, contact_person, phone, email, passport 
@@ -31,8 +27,9 @@ class ClientRepDB:
         return result
     
     def add(self, company_name, contact_person, email, phone, passport):
+         """Добавить нового пациента."""
+        with self.db.get_cursor() as cursor:
         new_id = str(uuid.uuid4())
-        with self.connection.cursor() as cursor:
             cursor.execute("""
                 INSERT INTO client (id, company_name, contact_person, email, phone, passport)
                 VALUES (%s, %s, %s, %s, %s, %s)
@@ -40,6 +37,7 @@ class ClientRepDB:
         return new_id
    
     def update_by_id(self, client_id, company_name=None, contact_person=None, email=None, phone=None, passport=None):
+            """Обновить данные пациента по ID."""
         fields = []
         values = []
         if company_name is not None:
@@ -62,7 +60,7 @@ class ClientRepDB:
             return  
         
         values.append(client_id)
-        with self.connection.cursor() as cursor:
+        with self.db.get_cursor() as cursor:
             cursor.execute(f"""
                 UPDATE client
                 SET {', '.join(fields)}
@@ -70,11 +68,13 @@ class ClientRepDB:
             """, tuple(values))
     
     def delete_by_id(self, client_id):
-        with self.connection.cursor() as cursor:
+         """Удалить пациента по ID."""
+        with self.db.get_cursor() as cursor:
             cursor.execute("DELETE FROM client WHERE id = %s", (client_id,))
     
     def get_count(self):
-        with self.connection.cursor() as cursor:
+       """Получить количество записей в таблице."""
+        with self.db.get_cursor() as cursor:
             cursor.execute("SELECT COUNT(*) FROM client")
             result = cursor.fetchone()
         return result[0]
