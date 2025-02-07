@@ -82,7 +82,4 @@ class ClientRepFile:
         """Получить количество клиентов"""
         return len(self._data)
     
-    def get_count(self):
-        """Получить количество элементов"""
-        data = self.strategy.read()
-        return len(data)
+
