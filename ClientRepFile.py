@@ -14,7 +14,7 @@ class ClientRepFile:
     def read_data_from_file(self):
         self._data = self._strategy.read()
 
-    def add_entity(self, first_name, last_name, email, gender, phone, disease):
+    def add_entity(self, company_name, contact_person, phone, email, passport):
         """Добавить нового клиента в список с новым id"""
     new_id = max([entry['id'] for entry in self._data], default=0) + 1  
         new_entity = {
