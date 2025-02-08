@@ -1,9 +1,9 @@
 import json
 import os
-from PatientRepFileStrategy import PatientRepFileStrategy
+from ClientRepFileStrategy import ClientRepFileStrategy
 
 # Стратегия работы с JSON
-class PatientRepJsonStrategy(PatientRepFileStrategy):
+class ClientRepJsonStrategy(ClientRepFileStrategy):
     def __init__(self, filename):
         self.filename = filename
 
