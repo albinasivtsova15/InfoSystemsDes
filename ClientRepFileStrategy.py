@@ -1,5 +1,6 @@
 import os
 from abc import ABC, abstractmethod
+
 # Абстрактный базовый класс стратегии работы с файлами
 class ClientRepFileStrategy(ABC):
   
