@@ -8,7 +8,6 @@ class ClientRepDB:
     
     def get_by_id(self, client_id):
         """Получить клиента по ID."""
-          """Получить пациента по ID."""
         with self.db.get_cursor() as cursor:
             cursor.execute("SELECT * FROM client WHERE id = %s", (client_id,))
             result = cursor.fetchone()
